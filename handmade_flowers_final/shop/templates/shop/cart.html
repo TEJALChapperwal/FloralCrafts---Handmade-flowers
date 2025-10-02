@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Cart</h2>
+{% if cart_items %}
+  <ul class="list-group mb-3">
+    {% for item in cart_items %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{ item.product.name }} (x{{ item.quantity }})
+      <span>{{ item.product.price }} INR</span>
+    </li>
+    {% endfor %}
+  </ul>
+  <h4>Total: {{ total }} INR</h4>
+  <a href="{% url 'shop:checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

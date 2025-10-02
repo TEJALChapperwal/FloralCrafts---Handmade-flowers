@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Handmade Flowers</title>
+    <link rel="stylesheet" href="{% static 'shop/css/signup.css' %}">
+    <style>
+        /* Basic CSS for signup page */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-container {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        .signup-container h2 {
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .signup-container form input[type="text"],
+        .signup-container form input[type="email"],
+        .signup-container form input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .signup-container form button {
+            width: 100%;
+            padding: 12px;
+            background: #ff7f50;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .signup-container form button:hover {
+            background: #ff6333;
+        }
+
+        .signup-container p {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .signup-container p a {
+            color: #ff7f50;
+            text-decoration: none;
+        }
+
+        .signup-container p a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <h2>Sign Up</h2>
+
+    {% if form.errors %}
+        <div class="error-message">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'shop:signup' %}">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password1" placeholder="Password" required>
+        <input type="password" name="password2" placeholder="Confirm Password" required>
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account? <a href="{% url 'shop:login' %}">Login</a></p>
+    <p><a href="{% url 'shop:product_list' %}">Back to Products</a></p>
+</div>
+
+</body>
+</html>
