@@ -52,8 +52,12 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 STATIC_URL = '/static/'
+<<<<<<< HEAD
 # Serve project-level `static/` directory (there is a top-level `static/style.css`).
 STATICFILES_DIRS = [BASE_DIR / 'static']
+=======
+STATICFILES_DIRS = [BASE_DIR / 'shop' / 'static']
+>>>>>>> 7e0d1c97e8ab9933dbec51a67900c5671ea590fd
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -1,9 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
+<<<<<<< HEAD
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+=======
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+>>>>>>> 7e0d1c97e8ab9933dbec51a67900c5671ea590fd
 from .models import Product, Order, OrderItem
 
 # ---------------------------
@@ -11,6 +17,7 @@ from .models import Product, Order, OrderItem
 # ---------------------------
 
 def product_list(request):
+<<<<<<< HEAD
     # Search
     query = request.GET.get('q', '').strip()
     products_qs = Product.objects.all()
@@ -47,6 +54,10 @@ def product_delete(request, product_id):
     """
     # Do not delete automatically; just redirect to product list.
     return redirect('shop:product_list')
+=======
+    products = Product.objects.all()
+    return render(request, "shop/product_list.html", {"products": products})
+>>>>>>> 7e0d1c97e8ab9933dbec51a67900c5671ea590fd
 
 # ---------------------------
 # Cart & Checkout
@@ -58,6 +69,7 @@ def add_to_cart(request, product_id):
     request.session["cart"] = cart
     return redirect("shop:cart")
 
+<<<<<<< HEAD
 
 def update_cart(request):
     """Update quantities in the session-based cart. Expects POST with product_id and quantity."""
@@ -84,6 +96,8 @@ def remove_from_cart(request, product_id):
     request.session['cart'] = cart
     return redirect('shop:cart')
 
+=======
+>>>>>>> 7e0d1c97e8ab9933dbec51a67900c5671ea590fd
 def cart(request):
     cart = request.session.get("cart", {})
     products = Product.objects.filter(id__in=cart.keys())
@@ -96,6 +110,10 @@ def cart(request):
     return render(request, "shop/cart.html", {"cart_items": cart_items, "total": total})
 
 @login_required
+<<<<<<< HEAD
+=======
+@login_required
+>>>>>>> 7e0d1c97e8ab9933dbec51a67900c5671ea590fd
 def checkout(request):
     cart = request.session.get("cart", {})
 
@@ -110,16 +128,28 @@ def checkout(request):
             product = Product.objects.get(id=int(product_id))
             grand_total += product.price * quantity
 
+<<<<<<< HEAD
         # Create the order (Cash on Delivery only)
         order = Order.objects.create(user=user, address=request.POST.get('address'), total=grand_total, payment_method='cod')
+=======
+        # Create the order
+        order = Order.objects.create(user=user, address=request.POST.get('address'), total=grand_total)
+>>>>>>> 7e0d1c97e8ab9933dbec51a67900c5671ea590fd
 
         # Create OrderItems
         for product_id, quantity in cart.items():
             product = Product.objects.get(id=int(product_id))
             OrderItem.objects.create(order=order, product=product, quantity=quantity)
 
+<<<<<<< HEAD
         # Clear cart and redirect to success
         request.session['cart'] = {}
+=======
+        # Clear cart
+        request.session['cart'] = {}
+
+        # Redirect to success page
+>>>>>>> 7e0d1c97e8ab9933dbec51a67900c5671ea590fd
         return redirect("shop:order_success")
 
     # GET request: show checkout summary
@@ -140,6 +170,7 @@ from django.shortcuts import render
 def order_success(request):
     return render(request, "shop/order_success.html")
 
+<<<<<<< HEAD
 
 # Online payment flow removed — only Cash on Delivery is supported now.
 
@@ -159,6 +190,8 @@ def contact(request):
         return render(request, 'shop/contact_success.html', context)
     return render(request, 'shop/contact.html')
 
+=======
+>>>>>>> 7e0d1c97e8ab9933dbec51a67900c5671ea590fd
 # ---------------------------
 # Authentication
 # ---------------------------
