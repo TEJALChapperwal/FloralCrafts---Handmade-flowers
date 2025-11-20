@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <h2>About FlowerCrafts</h2>
+    <p class="lead">At FlowerCrafts we handcraft beautiful, long-lasting bouquets for every occasion. Each piece is designed and assembled by local artisans using high-quality materials and attention to detail.</p>
+
+    <h4>Our Mission</h4>
+    <p>We believe flowers (and the craft of making them) bring joy. Our mission is to create unique, eco-conscious arrangements that brighten homes and celebrations while supporting local makers.</p>
+
+    <h4>What makes us different</h4>
+    <ul>
+      <li>Handmade designs — no mass-produced arrangements.</li>
+      <li>Curated materials and sustainable packaging.</li>
+      <li>Personalized service — add a custom message at checkout.</li>
+    </ul>
+
+    <h4>Shipping & Returns</h4>
+    <p>We ship nationwide. Orders are dispatched within 2 business days. Because items are handmade, returns are accepted within 7 days for defective products — please contact us first.</p>
+
+    <a href="{% url 'shop:contact' %}" class="btn btn-outline-primary mt-3">Contact Us</a>
+  </div>
+</div>
+{% endblock %}

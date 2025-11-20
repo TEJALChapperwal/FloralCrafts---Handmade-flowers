@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>FlowerCrafts Shop</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <style>
+            /* small helpers that complement the external stylesheet */
+            .product-card img { height: 220px; object-fit: cover; }
+        </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'shop:product_list' %}">
+            <span style="font-size:1.4rem;">🌸</span>
+            <span class="fw-bold">FlowerCrafts</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item"><a class="nav-link" href="{% url 'shop:product_list' %}">Shop</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'shop:about' %}">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'shop:contact' %}">Contact</a></li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="btn btn-outline-primary ms-3" href="{% url 'shop:cart' %}">Cart</a></li>
+                    <li class="nav-item"><a class="btn btn-primary ms-2" href="{% url 'shop:logout' %}">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="btn btn-link ms-3" href="{% url 'shop:login' %}">Login</a></li>
+                    <li class="nav-item"><a class="btn btn-warning ms-2" href="{% url 'shop:signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="bg-light py-5 border-bottom">
+    <div class="container text-center">
+        <h1 class="display-5 fw-bold">Handmade Flowers for Every Moment</h1>
+        <p class="lead text-muted">Unique, handcrafted bouquets to brighten your day — delivered with care.</p>
+        <a class="btn btn-success btn-lg mt-3" href="{% url 'shop:product_list' %}">Browse Collections</a>
+    </div>
+</header>
+
+<main class="container my-5">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="bg-dark text-light py-4 mt-5">
+    <div class="container d-flex justify-content-between align-items-center">
+    <div>&copy; {% now "Y" %} FlowerCrafts • Handmade with love</div>
+        <div>
+            <a class="text-light me-3" href="#">Privacy</a>
+            <a class="text-light" href="#">Terms</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 text-center">
+    <h2>Thanks, {{ name|default:'friend' }}!</h2>
+    <p class="lead">We've received your message and will get back to you at <strong>{{ email }}</strong> shortly.</p>
+    <div class="card mt-4 p-3 text-start">
+      <h5>Message copy</h5>
+      <p>{{ message|linebreaks }}</p>
+    </div>
+    <a href="{% url 'shop:product_list' %}" class="btn btn-success mt-4">Back to shop</a>
+  </div>
+</div>
+{% endblock %}

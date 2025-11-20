@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h2>Payment for Order #{{ order.id }}</h2>
+    <p class="text-muted">Total amount: <strong>₹ {{ order.total }}</strong></p>
+
+    <div class="card p-3 mb-3">
+      <h5>Order summary</h5>
+      <ul>
+        {% for item in order.items.all %}
+          <li>{{ item.quantity }} × {{ item.product.name }} — ₹ {{ item.total_price }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <form method="post" action="{% url 'shop:payment_confirm' order.id %}">
+      {% csrf_token %}
+      <p>This is a simulated payment flow for development. Click Pay to mark the order as paid.</p>
+      <button class="btn btn-success">Pay ₹ {{ order.total }}</button>
+      <a href="{% url 'shop:product_list' %}" class="btn btn-link">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

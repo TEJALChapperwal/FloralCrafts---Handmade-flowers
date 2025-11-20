@@ -1,0 +1,34 @@
+
+* { margin:0; padding:0; box-sizing:border-box; }
+:root{
+	--accent:#6c4f37;
+	--accent-2:#8f6d4f;
+	--muted:#6b6b6b;
+}
+body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background-color:#f7f7f7; color:#333; }
+
+/* header/hero are handled in base template; keep product styles here */
+.product-card { border-radius:10px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease; }
+.product-card:hover { transform:translateY(-6px); box-shadow:0 10px 24px rgba(0,0,0,0.12); }
+.product-card .card-body { padding:1rem; }
+.product-card .card-title{ color:var(--accent); font-size:1.05rem; }
+.product-card .text-muted{ color:var(--muted); }
+
+.lead { color:#575757; }
+
+/* Utility spacing tweaks for main container */
+main.container { padding-top:1rem; padding-bottom:2rem; }
+
+/* Footer */
+footer { background-color:var(--accent-2); }
+
+/* Buttons */
+.btn-primary { background-color:var(--accent); border-color:var(--accent); }
+.btn-primary:hover { background-color:#4f3b2d; border-color:#4f3b2d; }
+
+/* Responsive image handling inside cards */
+.card-img-top { width:100%; height:260px; object-fit:cover; }
+
+/* Small adjustments for product detail */
+.card .card-title { font-size:1.4rem; }
+
